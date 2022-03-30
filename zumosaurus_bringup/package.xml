@@ -15,11 +15,9 @@
   <buildtool_depend>joint_state_controller</buildtool_depend>
   <buildtool_depend>forward_command_controller</buildtool_depend>
   <buildtool_depend>controller_manager</buildtool_depend>
+
   <buildtool_depend>zumosaurus_description</buildtool_depend>
   
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
-
   <export>
     <build_type>ament_cmake</build_type>
   </export>

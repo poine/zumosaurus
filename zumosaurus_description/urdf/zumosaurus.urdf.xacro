@@ -6,22 +6,17 @@
   <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="prefix" default="" />
 
-  <xacro:include filename="$(find zumosaurus_description)/urdf/zumosaurus/zumosaurus_macro.xacro"/>
-  <xacro:include filename="$(find zumosaurus_description)/urdf/zumosaurus/zumosaurus_macro.ros2_control.xacro"/>
+  <xacro:include filename="$(find zumosaurus_description)/urdf/zumosaurus_description.urdf.xacro" />
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find zumosaurus_description)/gazebo/zumosaurus.materials.xacro" />
+  <!-- Import diffbot ros2_control description -->
+  <xacro:include filename="$(find zumosaurus_description)/ros2_control/zumosaurus.ros2_control.xacro" />
 
-  <!-- create link fixed to the "world" -->
-  <link name="world" />
-
-  <!-- Load robot's macro with parameters -->
   <!-- set prefix if multiple robots are used -->
-  <xacro:zumosaurus prefix="$(arg prefix)" parent="world" >
-    <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
-  </xacro:zumosaurus>
+  <xacro:zumosaurus prefix="$(arg prefix)" />
 
   <xacro:zumosaurus_ros2_control
-    name="zumosaurus"
-    prefix="$(arg prefix)"
-    use_fake_hardware="$(arg use_fake_hardware)"
-    fake_sensor_commands="$(arg fake_sensor_commands)" />
+    name="ZumoSaurus" 
+    prefix="$(arg prefix)" />
 
 </robot>
