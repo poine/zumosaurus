@@ -1,0 +1,8 @@
+<library path="zumosaurus_controllers">
+  <class name="zumosaurus_controllers/SkelCustomController"
+         type="zumosaurus_controllers::SkelCustomController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    SkelCustomController ros2_control controller.
+  </description>
+  </class>
+</library>

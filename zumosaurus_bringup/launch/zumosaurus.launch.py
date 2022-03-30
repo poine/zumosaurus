@@ -1,4 +1,16 @@
-# $LICENSE$
+# Copyright 2020 poine (poinix@gmail.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -13,7 +25,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "runtime_config_package",
-            default_value="$RUNTIME_CONFIG_PKG_NAME$",
+            default_value="zumosaurus_bringup",
             description='Package with the controller\'s configuration in "config" folder. \
         Usually the argument is not set, it enables use of a custom setup.',
         )
@@ -21,14 +33,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="$ROBOT_NAME$_controllers.yaml",
+            default_value="zumosaurus_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
-            default_value="$DESCR_PKG_NAME$",
+            default_value="zumosaurus_description",
             description="Description package with robot URDF/xacro files. Usually the argument \
         is not set, it enables use of a custom description.",
         )
@@ -36,7 +48,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
-            default_value="$ROBOT_NAME$.urdf.xacro",
+            default_value="zumosaurus.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )
@@ -88,7 +100,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package), "description", description_file]
+                [FindPackageShare(description_package), "urdf", description_file]
             ),
             " ",
             "prefix:=",
@@ -109,7 +121,7 @@ def generate_launch_description():
         [FindPackageShare(runtime_config_package), "config", controllers_file]
     )
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(description_package), "rviz", "$ROBOT_NAME$.rviz"]
+        [FindPackageShare(description_package), "rviz", "zumosaurus.rviz"]
     )
 
     control_node = Node(

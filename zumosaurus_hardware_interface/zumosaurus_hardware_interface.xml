@@ -1,0 +1,9 @@
+<library path="zumosaurus_hardware_interface">
+  <class name="zumosaurus_hardware_interface/ZumosaurusRobotHardware"
+         type="zumosaurus_hardware_interface::ZumosaurusRobotHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface.
+    </description>
+  </class>
+</library>
