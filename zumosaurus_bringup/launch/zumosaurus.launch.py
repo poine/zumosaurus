@@ -11,16 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import os
 
+from ament_index_python import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler, IncludeLaunchDescription
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 launch_viz = False
-
+launch_teleop = True
 
 def generate_launch_description():
     # Declare arguments
@@ -157,7 +160,14 @@ def generate_launch_description():
             on_exit=[robot_controller_spawner],
         )
     )
-    
+
+    if launch_teleop: # include another launch file
+        launch_include = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('zumosaurus_bringup'),
+                    'launch/teleop_node.launch.py'))
+    )
     nodes =  [
         control_node,
         robot_state_pub_node,
